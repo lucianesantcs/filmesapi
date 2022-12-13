@@ -7,6 +7,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//adicionar esse trecho em SQL SERVER
+builder.Services.AddDbContext<FilmeContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FilmeConnection"));
+});
+
+//em MYSQL
+builder.Services.AddDbContext<FilmeContext>(options =>
+{
+    options.UseMySQLServer(builder.Configuration.GetConnectionString("FilmeConnection"));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
