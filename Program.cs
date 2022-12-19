@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MySQL.Data.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql;
 using FilmesAPI.Data;
+using FilmesAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,17 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//adicionar esse trecho em SQL SERVER
-builder.Services.AddDbContext<FilmeContext>(options =>
-{
-    options.UseMySQL(builder.Configuration.GetConnectionString("FilmeConnection"));
-});
-
-//em MYSQL
-builder.Services.AddDbContext<FilmeContext>(options =>
-{
-    options.UseMySQL(builder.Configuration.GetConnectionString("FilmeConnection"));
-});
+builder.Services.AddDbContext<FilmeContext>(opts => opts.UseMySql(builder.Configuration.GetConnectionString("FilmeConnection"), new MySqlServerVersion(new Version(6, 0))));
 
 var app = builder.Build();
 
