@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using MySQL.Data.EntityFrameworkCore;
+using FilmesAPI.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,13 +14,13 @@ builder.Services.AddSwaggerGen();
 //adicionar esse trecho em SQL SERVER
 builder.Services.AddDbContext<FilmeContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FilmeConnection"));
+    options.UseMySQL(builder.Configuration.GetConnectionString("FilmeConnection"));
 });
 
 //em MYSQL
 builder.Services.AddDbContext<FilmeContext>(options =>
 {
-    options.UseMySQLServer(builder.Configuration.GetConnectionString("FilmeConnection"));
+    options.UseMySQL(builder.Configuration.GetConnectionString("FilmeConnection"));
 });
 
 var app = builder.Build();
