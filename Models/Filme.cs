@@ -5,10 +5,12 @@ using FilmesAPI.Data;
 namespace FilmesAPI.Models
 {
     public class Filme
-    {
+    {   
+        [Key]
+        [Required]
         public int Id { get; set; }
         [Required(ErrorMessage = "O campo título é obrigatório")]
-        public string Titulo { get; set; }
+        public string Titulo { get; set; } 
         [Required(ErrorMessage = "O campo diretor é obrigatório")]
         public string Diretor { get; set; }
         public string Genero { get; set; }
